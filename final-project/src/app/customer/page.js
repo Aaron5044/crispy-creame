@@ -63,11 +63,6 @@ export default function Navbar() {
               <Button color="inherit">Login</Button>
             </Link>
 
-            {/* Link to the register page */}
-            <Link href="/sign-up" passHref>
-              <Button color="inherit">Sign Up</Button>
-            </Link>
-
             {/* Link to the view cart page */}
             <Link href="/view-cart" passHref>
               <Button color="inherit">View Cart</Button>

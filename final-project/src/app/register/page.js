@@ -6,7 +6,7 @@ import { Button, AppBar, Toolbar, Typography, Box, TextField, Container, Paper, 
 import MenuIcon from '@mui/icons-material/Menu';  // Menu icon for the burger button
 import Link from 'next/link';  // Link component to navigate between pages
 
-// Custom theme for the login page
+// Custom theme for the register page
 const theme = {
   palette: {
     primary: {
@@ -22,18 +22,28 @@ const theme = {
   },
 };
 
-// Functional component for the Login Page
-export default function LoginPage() {
+// Functional component for the Register Page
+export default function RegisterPage() {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [address, setAddress] = useState('');
+  const [phone, setPhone] = useState('');
+  const [postalCode, setPostalCode] = useState('');
   const [open, setOpen] = useState(false); // State for burger menu open/close
   const [homeText, setHomeText] = useState('Home'); // State for the "Home" button text
 
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add login logic here (e.g., API call)
-    console.log('Login attempted with email:', email, 'and password:', password);
+    // Add registration logic here (e.g., API call)
+    console.log('Registration attempted with:');
+    console.log('Name:', name);
+    console.log('Email:', email);
+    console.log('Password:', password);
+    console.log('Address:', address);
+    console.log('Phone:', phone);
+    console.log('Postal Code:', postalCode);
   };
 
   // Function to toggle the burger menu
@@ -94,10 +104,20 @@ export default function LoginPage() {
       <Container maxWidth="sm" sx={{ mt: 5 }}>
         <Paper elevation={3} sx={{ p: 4, backgroundColor: '#FFF8E1' }}>
           <Typography variant="h4" gutterBottom sx={{ color: theme.palette.text.primary }}>
-            Login
+            Register
           </Typography>
-          {/* Login Form */}
+          {/* Register Form */}
           <form onSubmit={handleSubmit}>
+            <Box sx={{ mb: 2 }}>
+              <TextField
+                fullWidth
+                label="Name"
+                variant="outlined"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                sx={{ backgroundColor: '#ffffff' }}
+              />
+            </Box>
             <Box sx={{ mb: 2 }}>
               <TextField
                 fullWidth
@@ -119,20 +139,51 @@ export default function LoginPage() {
                 sx={{ backgroundColor: '#ffffff' }}
               />
             </Box>
+            <Box sx={{ mb: 2 }}>
+              <TextField
+                fullWidth
+                label="Address"
+                variant="outlined"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+                sx={{ backgroundColor: '#ffffff' }}
+              />
+            </Box>
+            <Box sx={{ mb: 2 }}>
+              <TextField
+                fullWidth
+                label="Phone Number"
+                type="tel"
+                variant="outlined"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                sx={{ backgroundColor: '#ffffff' }}
+              />
+            </Box>
+            <Box sx={{ mb: 2 }}>
+              <TextField
+                fullWidth
+                label="Postal Code"
+                variant="outlined"
+                value={postalCode}
+                onChange={(e) => setPostalCode(e.target.value)}
+                sx={{ backgroundColor: '#ffffff' }}
+              />
+            </Box>
             <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{ backgroundColor: theme.palette.primary.main }}
             >
-              Login
+              Register
             </Button>
           </form>
           <Box sx={{ mt: 2, textAlign: 'center' }}>
             <Typography variant="body1" sx={{ color: theme.palette.text.secondary }}>
-              Don't have an account?{' '}
-              <Link href="/register" passHref>
-                <Button variant="text">Register Here</Button>
+              Already have an account?{' '}
+              <Link href="/login" passHref>
+                <Button variant="text">Login Here</Button>
               </Link>
             </Typography>
           </Box>
