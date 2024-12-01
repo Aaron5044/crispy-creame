@@ -1,0 +1,32 @@
+.pageContainer {
+    background-image: url("https://i.pinimg.com/736x/09/f5/eb/09f5eb1d5ebb8d03ed612ff5098f8843.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.formWrapper {
+    position: relative;
+    z-index: 10;
+    backdrop-filter: blur(10px);
+    background-color: rgba(28, 28, 28, 0.8);
+    width: 30%;
+    padding: 50px;
+    border-radius: 10px;
+    margin-top: 160px;
+}
+
+.loginHeader {
+    text-align: center;
+    font-weight: bold;
+    color: #fff;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #D40076;
+}

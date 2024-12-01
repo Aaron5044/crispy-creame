@@ -1,0 +1,62 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: #1c1c1c;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    height: 100%; /* Ensure the form takes full height of its container */
+  }
+  
+  .label {
+    font-weight: bold;
+    font-size: 1.2rem; /* Make the label text larger */
+    color: #B0B0B0;
+    margin-bottom: 5px;
+  }
+  
+  .input {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #B0B0B0;
+    background-color: #1c1c1c;
+    color: #fff;
+  }
+  
+  .equal {
+    font-size: 2rem; /* Large equal sign */
+    text-align: center; /* Center the equal sign */
+    margin: 20px 0; /* Add some space around it */
+  }
+  
+  .button {
+    margin-top: auto; /* Push the button to the bottom */
+    padding: 10px;
+    background-color: #1c1c1c;
+    color: #D40076;
+    border: 2px solid #D40076;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button:hover {
+    background-color: #333;
+  }
+  .registerLink {
+    margin-top: 15px;
+    text-align: center; /* Center the link below the button */
+  }
+  
+  .link {
+    font-size: 1rem;
+    color: #D40076;
+    text-decoration: none; /* Remove underline */
+  }
+  
+  .link:hover {
+    text-decoration: underline; /* Underline when hovered */
+  }
+  

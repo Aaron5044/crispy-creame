@@ -1,7 +1,7 @@
 "use client";  // Ensure this is the first line of your component file
 import React, { useEffect, useState } from 'react';
 import { useCart } from '../../view_cart/components/CartContext';
-import styles from '../../customer/styles.module.css';  // Ensure correct styles import
+import styles from '../../customer/styles/styles.module.css';  // Ensure correct styles import
 import productStyles from '../styles/productCardStyles.module.css';  // Adjusted for correct import
 
 const ProductCard = ({ product }) => {

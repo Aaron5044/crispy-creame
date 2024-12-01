@@ -1,0 +1,40 @@
+.pageContainer {
+    position: relative;
+    padding: 20px;
+  }
+  
+  .pageContainer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('https://th.bing.com/th/id/OIP.5HLtC67d5qvCFUMXSk_MVgHaE7?w=267&h=180&c=7&r=0&o=5&pid=1.7'); /* Add your image URL here */
+    background-size: cover;
+    background-position: center;
+    filter: blur(10px); /* Applies the blur effect */
+    z-index: -1; /* Places the blurred image behind the content */
+  }
+  
+  
+  
+  .productPage {
+    position: relative; /* Keeps the content in front of the background */
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centers content horizontally */
+    align-items: center; /* Centers content vertically */
+    text-align: center; /* Ensures text is centered within */
+    margin-top: 20px; /* Adds spacing above the section to ensure it's not touching navbar */
+    padding: 20px; /* Adds some padding for spacing */
+  }
+  
+  .productGrid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* This ensures 4 cards per row */
+    gap: 90px; /* Adjust the gap as needed */
+    margin-top: 40px; /* Adds spacing below the title */
+  }
+  

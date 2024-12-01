@@ -1,13 +1,13 @@
 "use client";  // Mark the component as a client component
 
 import React, { useEffect, useState } from 'react';
-import Navbar from './components/Navbar';
+import Navbar from '../TEMPLATES/Navbar/Navbar.js';
 import ImageSlider from './components/imageSlider.js';
-import ProductCard from './components/ProductCard';
-import styles from './styles.module.css'; // Correct CSS import
+import ProductCard from './components/ProductCard.js';
+import styles from '../customer/styles/styles.module.css'; // Correct CSS import
 
 // Import CartProvider to wrap the page
-import { CartProvider } from '../view_cart/components/CartContext';  // Correct CartContext import
+import { CartProvider } from '../view_cart/components/CartContext.js';  // Correct CartContext import
 
 export default function CustomerPage() {
   const [products, setProducts] = useState([]);

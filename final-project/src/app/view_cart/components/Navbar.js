@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import MenuIcon from '@mui/icons-material/Menu';
 import { IconButton, Drawer, Box } from '@mui/material';
-import styles from '../../customer/styles/navbarStyles';
+import styles from '../styles/navbarStyles';
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -31,7 +31,7 @@ export default function Navbar() {
           <Link href="/view_cart" style={styles.link}>
             CART
           </Link>
-          <Link href="/login" style={styles.link}>
+          <Link href="/mainLogin" style={styles.link}>
             LOGIN / REGISTER
           </Link>
 
@@ -53,6 +53,6 @@ export default function Navbar() {
           </Link>
         </Box>
       </Drawer>
-    </div>
-  );
+    </div>
+  );
 }
