@@ -1,49 +1,42 @@
-'use client';
+"use client";  // Mark the component as a client component
 
-import { useState } from 'react';
-import { Button, AppBar, Toolbar, Typography, IconButton, Box } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
-import Link from 'next/link';
-import styles from './customer.module.css';
+import React, { useEffect, useState } from 'react';
+import Navbar from './components/Navbar';
+import ImageSlider from './components/ImageSlider';
+import ProductCard from './components/ProductCard';
+import styles from './styles.module.css'; // Correct CSS import
 
-export default function Navbar() {
-  const [open, setOpen] = useState(false);
+// Import CartProvider to wrap the page
+import { CartProvider } from '../view_cart/components/CartContext';  // Correct CartContext import
 
-  const handleMenuClick = () => {
-    setOpen(!open);
-  };
+export default function CustomerPage() {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    // Fetch the products from your database or API here
+    fetch('../api/getProducts')  // Replace this with the actual API endpoint
+      .then((res) => res.json())
+      .then((data) => setProducts(data))
+      .catch((error) => console.error('Error fetching products:', error));
+  }, []);
 
   return (
-    <Box className={styles.pageBackground}>
-      {/* AppBar (Navbar) */}
-      <AppBar position="sticky" className={styles.appBar}>
-        <Toolbar className={styles.toolbar}>
-          <IconButton edge="start" color="inherit" aria-label="menu" onClick={handleMenuClick}>
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" className={styles.logo}>
-            Crispy Creame
-          </Typography>
-          <Box className={styles.navLinks}>
-            <Link href="/customer" passHref>
-              <Button color="inherit">Home</Button>
-            </Link>
-            <Link href="/login" passHref>
-              <Button color="inherit">Login</Button>
-            </Link>
-            <Link href="/view-cart" passHref>
-              <Button color="inherit">View Cart</Button>
-            </Link>
-            <Link href="/checkout" passHref>
-              <Button color="inherit">Checkout</Button>
-            </Link>
-          </Box>
-        </Toolbar>
-      </AppBar>
+    // Wrap your component with CartProvider
+    <CartProvider>
+      <div className={styles.pageContainer}>
+        <Navbar />
+        <ImageSlider />
 
-      <Box className={styles.pageContent}>
-        <Typography variant="h4">Welcome to Crispy Creame!</Typography>
-      </Box>
-    </Box>
-  );
+        <div className={styles.productPage}>
+          <h2>Our Products</h2>
+
+          <div className={styles.productGrid}>
+            {products.map((product) => (
+              <ProductCard key={product._id} product={product} />
+            ))}
+          </div>
+        </div>
+      </div>
+    </CartProvider>
+  );
 }
