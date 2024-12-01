@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Navbar from './components/Navbar';
-import ImageSlider from './components/ImageSlider';
+import ImageSlider from './components/imageSlider.js';
 import ProductCard from './components/ProductCard';
 import styles from './styles.module.css'; // Correct CSS import
 

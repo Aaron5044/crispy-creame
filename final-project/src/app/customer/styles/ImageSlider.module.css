@@ -1,0 +1,55 @@
+/* Ensure slider is centered on the page */
+.slider {
+    position: relative;
+    max-width: 80vw; /* Slider will take up 80% of the viewport width */
+    margin: 60px auto 0; /* Add a margin at the top to move it down */
+    height: 70vh; /* Full height of the viewport */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ebe0e3; /* Dark pink background */
+    border-radius: 50px; /* Optional: Rounded corners */
+    overflow: hidden; /* Hide any images that go outside the slider bounds */
+  }
+  
+  /* Container to hold the images horizontally */
+  .imageContainer {
+    width: 100%;
+    height: 100%; /* Ensure each image container fills the slider height */
+    display: inline-block; /* Make containers line up horizontally */
+  }
+  
+  /* Each image will fill its container */
+  .image {
+    width: 100%;
+    height: auto;
+    object-fit: cover; /* Ensure images cover the container without stretching */
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  /* Controls for previous/next buttons */
+  .controls {
+    position: absolute;
+    top: 50%;
+    width: 97%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+  }
+  
+  .prevButton,
+  .nextButton {
+    background-color: rgba(192, 18, 18, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    border-radius: 50%;
+  }
+  
+  .prevButton:hover,
+  .nextButton:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  
