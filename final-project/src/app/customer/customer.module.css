@@ -6,7 +6,7 @@
   
   /* AppBar (navbar) styles */
   .appBar {
-    background-color: #FFB6C1 !important; /* Ensure it overrides MUI styles */
+    background-color: #ffb6c2 !important; /* Ensure it overrides MUI styles */
   }
   
   /* Toolbar styling */
@@ -29,6 +29,6 @@
   /* Content container */
   .pageContent {
     padding: 24px; /* Equivalent to 3 spacing units */
-    color: #333333; /* Darker text color */
+    color: #33333362; /* Darker text color */
   }
   
