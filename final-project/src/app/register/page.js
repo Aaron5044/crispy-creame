@@ -1,28 +1,12 @@
 'use client';
 
-// Importing necessary components from MUI
+// Import necessary components and CSS module
 import { useState } from 'react';
 import { Button, AppBar, Toolbar, Typography, Box, TextField, Container, Paper, IconButton } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';  // Menu icon for the burger button
-import Link from 'next/link';  // Link component to navigate between pages
+import MenuIcon from '@mui/icons-material/Menu';
+import Link from 'next/link';
+import styles from './register.module.css';
 
-// Custom theme for the register page
-const theme = {
-  palette: {
-    primary: {
-      main: '#FFB6C1', // Light pink color for buttons
-    },
-    secondary: {
-      main: '#FFF8E1', // Light cream color for the page background
-    },
-    text: {
-      primary: '#000000', // Black text for the form labels
-      secondary: '#333333', // Darker color for page content text
-    },
-  },
-};
-
-// Functional component for the Register Page
 export default function RegisterPage() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -30,163 +14,110 @@ export default function RegisterPage() {
   const [address, setAddress] = useState('');
   const [phone, setPhone] = useState('');
   const [postalCode, setPostalCode] = useState('');
-  const [open, setOpen] = useState(false); // State for burger menu open/close
-  const [homeText, setHomeText] = useState('Home'); // State for the "Home" button text
+  const [open, setOpen] = useState(false);
 
-  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add registration logic here (e.g., API call)
-    console.log('Registration attempted with:');
-    console.log('Name:', name);
-    console.log('Email:', email);
-    console.log('Password:', password);
-    console.log('Address:', address);
-    console.log('Phone:', phone);
-    console.log('Postal Code:', postalCode);
+    console.log('Registration details:', { name, email, password, address, phone, postalCode });
   };
 
-  // Function to toggle the burger menu
   const handleMenuClick = () => {
-    setOpen(!open); // Toggle menu open/close
-  };
-
-  // Function to handle "Home" button click
-  const handleHomeClick = () => {
-    // Any additional logic can go here
-    console.log('Home button clicked');
+    setOpen(!open);
   };
 
   return (
-    // Outer Box for the full page background
-    <Box sx={{ backgroundColor: theme.palette.secondary.main, minHeight: '100vh' }}>
-      {/* AppBar (Navbar) */}
-      <AppBar position="sticky" sx={{ backgroundColor: '#FFB6C1' }}>
-        {/* Toolbar is the container for the navbar elements */}
-        <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
-          {/* Burger menu icon */}
+    <Box className={styles.pageBackground}>
+      <AppBar position="sticky" className={styles.appBar}>
+        <Toolbar>
           <IconButton edge="start" color="inherit" aria-label="menu" onClick={handleMenuClick}>
-            <MenuIcon /> {/* This is the hamburger icon */}
+            <MenuIcon />
           </IconButton>
-
-          {/* Logo */}
-          <Typography variant="h6" sx={{ flexGrow: 1, color: '#FFFFFF' }}>
+          <Typography variant="h6" className={styles.logo}>
             Crispy Creame
           </Typography>
-
-          {/* Links */}
-          <Box sx={{ display: 'flex' }}>
+          <Box className={styles.navLinks}>
             <Link href="/customer" passHref>
-              <Button color="inherit" onClick={handleHomeClick} sx={{ color: '#FFFFFF' }}>
-                {homeText} {/* Dynamically change the button text */}
-              </Button>
+              <Button color="inherit">Home</Button>
             </Link>
-
-            {/* Link to the login page */}
             <Link href="/login" passHref>
-              <Button color="inherit" sx={{ color: '#FFFFFF' }}>Login</Button>
+              <Button color="inherit">Login</Button>
             </Link>
-
-            {/* Link to the view cart page */}
             <Link href="/view-cart" passHref>
-              <Button color="inherit" sx={{ color: '#FFFFFF' }}>View Cart</Button>
+              <Button color="inherit">View Cart</Button>
             </Link>
-
-            {/* Link to the checkout page */}
             <Link href="/checkout" passHref>
-              <Button color="inherit" sx={{ color: '#FFFFFF' }}>Checkout</Button>
+              <Button color="inherit">Checkout</Button>
             </Link>
           </Box>
         </Toolbar>
       </AppBar>
 
-      {/* Main Content */}
       <Container maxWidth="sm" sx={{ mt: 5 }}>
-        <Paper elevation={3} sx={{ p: 4, backgroundColor: '#FFF8E1' }}>
-          <Typography variant="h4" gutterBottom sx={{ color: theme.palette.text.primary }}>
+        <Paper elevation={3} className={styles.formContainer}>
+          <Typography variant="h4" className={styles.heading}>
             Register
           </Typography>
-          {/* Register Form */}
           <form onSubmit={handleSubmit}>
-            <Box sx={{ mb: 2 }}>
-              <TextField
-                fullWidth
-                label="Name"
-                variant="outlined"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                sx={{ backgroundColor: '#ffffff' }}
-              />
-            </Box>
-            <Box sx={{ mb: 2 }}>
-              <TextField
-                fullWidth
-                label="Email"
-                variant="outlined"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                sx={{ backgroundColor: '#ffffff' }}
-              />
-            </Box>
-            <Box sx={{ mb: 2 }}>
-              <TextField
-                fullWidth
-                label="Password"
-                type="password"
-                variant="outlined"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                sx={{ backgroundColor: '#ffffff' }}
-              />
-            </Box>
-            <Box sx={{ mb: 2 }}>
-              <TextField
-                fullWidth
-                label="Address"
-                variant="outlined"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-                sx={{ backgroundColor: '#ffffff' }}
-              />
-            </Box>
-            <Box sx={{ mb: 2 }}>
-              <TextField
-                fullWidth
-                label="Phone Number"
-                type="tel"
-                variant="outlined"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                sx={{ backgroundColor: '#ffffff' }}
-              />
-            </Box>
-            <Box sx={{ mb: 2 }}>
-              <TextField
-                fullWidth
-                label="Postal Code"
-                variant="outlined"
-                value={postalCode}
-                onChange={(e) => setPostalCode(e.target.value)}
-                sx={{ backgroundColor: '#ffffff' }}
-              />
-            </Box>
-            <Button
-              type="submit"
+            <TextField
               fullWidth
-              variant="contained"
-              sx={{ backgroundColor: theme.palette.primary.main }}
-            >
+              label="Name"
+              variant="outlined"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className={styles.textField}
+            />
+            <TextField
+              fullWidth
+              label="Email"
+              variant="outlined"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className={styles.textField}
+            />
+            <TextField
+              fullWidth
+              label="Password"
+              type="password"
+              variant="outlined"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className={styles.textField}
+            />
+            <TextField
+              fullWidth
+              label="Address"
+              variant="outlined"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              className={styles.textField}
+            />
+            <TextField
+              fullWidth
+              label="Phone Number"
+              type="tel"
+              variant="outlined"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              className={styles.textField}
+            />
+            <TextField
+              fullWidth
+              label="Postal Code"
+              variant="outlined"
+              value={postalCode}
+              onChange={(e) => setPostalCode(e.target.value)}
+              className={styles.textField}
+            />
+            <Button type="submit" fullWidth variant="contained" className={styles.submitButton}>
               Register
             </Button>
           </form>
-          <Box sx={{ mt: 2, textAlign: 'center' }}>
-            <Typography variant="body1" sx={{ color: theme.palette.text.secondary }}>
-              Already have an account?{' '}
-              <Link href="/login" passHref>
-                <Button variant="text">Login Here</Button>
-              </Link>
-            </Typography>
-          </Box>
+          <Typography variant="body1" className={styles.loginText}>
+            Already have an account?{' '}
+            <Link href="/login" passHref>
+              <Button variant="text">Login Here</Button>
+            </Link>
+          </Typography>
         </Paper>
       </Container>
     </Box>

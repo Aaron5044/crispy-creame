@@ -1,0 +1,66 @@
+/* login.css */
+
+/* Background for the entire page */
+.pageBackground {
+    background-color: #FFF8E1; /* Light cream color */
+    min-height: 100vh;
+  }
+  
+  /* AppBar (navbar) styles */
+  .appBar {
+    background-color: #FFB6C1 !important; /* Light pink color */
+  }
+  
+  /* Toolbar styling */
+  .toolbar {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  /* Typography (Crispy Creame logo) styles */
+  .logo {
+    color: #FFFFFF; /* White color for the text */
+    flex-grow: 1;
+  }
+  
+  /* Navbar links container */
+  .navLinks {
+    display: flex;
+  }
+  
+  /* Main content styles */
+  .pageContent {
+    margin-top: 20px;
+  }
+  
+  /* Typography for the form header */
+  .formHeader {
+    color: #000000; /* Black text for form labels */
+  }
+  
+  /* Form TextField */
+  .textField {
+    background-color: #ffffff;
+    margin-bottom: 16px;
+    margin-top: 20px;
+  }
+  
+  /* Button styles */
+  .submitButton {
+    background-color: #FFB6C1 !important; /* Light pink color */
+    width: 100%;
+    padding: 10px;
+  }
+  
+  /* Registration link styles */
+  .registerLink {
+    text-align: center;
+    margin-top: 16px;
+  }
+  
+  .registerLinkText {
+    color: #333333;
+  }
+
+  
+  
