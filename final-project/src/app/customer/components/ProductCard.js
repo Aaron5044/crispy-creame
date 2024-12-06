@@ -69,8 +69,7 @@ const ProductPage = () => {
   };
 
   return (
-    <div style={{ padding: "2rem", backgroundColor: "#f5f5f5", color: "#333" }}>
-      <h1>Products</h1>
+    <div style={{ padding: "2rem", backgroundColor: "black",}}>
       {products.length === 0 ? (
         <p>Loading products...</p>
       ) : (
@@ -84,20 +83,6 @@ const ProductPage = () => {
           ))}
         </div>
       )}
-      <button
-        onClick={goToCart}
-        style={{
-          marginTop: "2rem",
-          padding: "0.5rem 1rem",
-          backgroundColor: "#333",
-          color: "#fff",
-          border: "none",
-          borderRadius: "4px",
-          cursor: "pointer",
-        }}
-      >
-        Go to Cart
-      </button>
     </div>
   );
 };

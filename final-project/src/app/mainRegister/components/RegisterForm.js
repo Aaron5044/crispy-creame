@@ -58,7 +58,7 @@ export default function RegisterForm() {
         margin: '90px auto',
         padding: 3,
         borderRadius: 2,
-        bgcolor: '#767B91',
+        bgcolor: 'black',
         boxShadow: 3,
         border: '2px solid white',
       }}
@@ -68,7 +68,7 @@ export default function RegisterForm() {
         component="h2"
         textAlign="center"
         fontWeight="bold"
-        color="white"
+        color="yellow"
         mb={2}
       >
         SIGN UP
@@ -159,12 +159,11 @@ export default function RegisterForm() {
           fullWidth
           sx={{
             mt: 2,
-            bgcolor: '#767B91',
-            color: 'white',
+            bgcolor: 'yellow',
+            color: 'black',
             border: '2px solid white',
             '&:hover': {
-              bgcolor: '#F7C59F',
-              color: 'darkpink',
+              bgcolor: 'olivedrab',
             },
           }}
         >

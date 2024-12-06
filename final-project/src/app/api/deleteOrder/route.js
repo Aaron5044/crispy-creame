@@ -1,7 +1,7 @@
 const { MongoClient, ObjectId } = require('mongodb');
 
 // MongoDB Atlas connection URI
-const uri = "mongodb+srv://KK_DB:pass@kkdb.hwqqo.mongodb.net/?retryWrites=true&w=majority&appName=KKDB"; // Replace with your connection URI
+const uri = "mongodb+srv://aaron:Pass@cluster0.ngesq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"; // Replace with your connection URI
 
 // Function to delete an order
 async function deleteOrder(orderId) {
@@ -11,7 +11,7 @@ async function deleteOrder(orderId) {
         await client.connect();
         console.log("Connected to MongoDB Atlas");
 
-        const database = client.db("KK_DB"); // Replace with your database name
+        const database = client.db("crispy_creame"); // Replace with your database name
         const ordersCollection = database.collection("ORDERS"); // Replace with your collection name
 
         // Delete the order by ID

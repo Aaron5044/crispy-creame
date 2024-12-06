@@ -22,21 +22,12 @@ export default function RegisterPage() {
           position: 'absolute', // Position it absolutely
           top: 0, // Align to the top of the parent
           left: 0, // Align to the left of the parent
-          width: '50%', // Set the width to half of the parent
+          width: '100%', // Set the width to half of the parent
           height: '100%', // Set the height to 100% of the parent
           bgcolor: 'black', // Set background color to black
         }}
       />
-      <Box
-        sx={{
-          position: 'absolute', // Position it absolutely
-          top: 0, // Align to the top of the parent
-          right: 0, // Align to the right of the parent
-          width: '50%', // Set the width to half of the parent
-          height: '100%', // Set the height to 100% of the parent
-          bgcolor: '#8B1A4B', // Set background color to pink
-        }}
-      />
+ 
       
       {/* Foreground Content */}
       <Navbar /> // Include the Navbar component

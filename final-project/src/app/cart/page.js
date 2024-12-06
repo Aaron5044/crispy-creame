@@ -1,17 +1,16 @@
 'use client';
 import { useState, useEffect } from "react";
 import { getCart, addToCart, clearCart } from "../cart/utils/storage";
-import { IconButton, Typography, Grid, Button, TextField } from "@mui/material";
+import { IconButton, Typography, Grid, Button, TextField, Snackbar } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Navbar from '../TEMPLATES/NAVBAR/Navbar';
-import styles from './style/cartPage.module.css';
+import styles from './style/cartPage.module.css'; // Import the CSS module
+import { useRouter } from 'next/navigation'; // For redirecting
 
 export default function CartPage() {
   const [cart, setCartState] = useState([]);
-  const [email, setEmail] = useState('');
-  const [cardholder, setCardholder] = useState('');
-  const [cvv, setCvv] = useState('');
-  const [expiration, setExpiration] = useState('');
+  const [showEmptyCartMessage, setShowEmptyCartMessage] = useState(false); // New state for empty cart message
+  const router = useRouter();
 
   useEffect(() => {
     const savedCart = getCart();
@@ -44,99 +43,43 @@ export default function CartPage() {
   const shippingFee = cart.length > 0 ? 5.99 : 0;
   const total = subtotal + shippingFee;
 
-  const handleCheckout = async (e) => {
-    e.preventDefault();
-
-    const orderDetails = {
-      email,
-      cardholder,
-      cvv,
-      expiration,
-      items: cart.map(item => ({
-        PROD_NAME: item.PROD_NAME,
-        PROD_PRICE: item.PROD_PRICE,
-        quantity: item.quantity,
-      })),
-      subtotal,
-      shippingFee,
-      total,
-    };
-
-    try {
-      const response = await fetch('../api/setOrder', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(orderDetails),
-      });
-
-      if (response.ok) {
-        alert("Checkout complete!");
-        clearCart();
-        setCartState([]); // Clear the cart in state after checkout
-      } else {
-        alert("Something went wrong with the checkout.");
-      }
-    } catch (error) {
-      console.error("Checkout error:", error);
-      alert("An error occurred during checkout.");
+  // Function to redirect to the checkout page or show empty cart message
+  const goToCheckout = () => {
+    if (cart.length > 0) {
+      router.push("/checkout"); // Redirect to checkout page
+    } else {
+      setShowEmptyCartMessage(true); // Show empty cart message
     }
   };
 
   return (
     <div className={styles.cartContainer}>
       <Navbar />
-      <Typography variant="h4" gutterBottom sx={{ textAlign: 'center', paddingTop: 4 }}>Shopping Cart</Typography>
+      <Typography variant="h4" gutterBottom className={styles.cartTitle}>SHOPPING CART</Typography>
       <Grid container spacing={4} sx={{ marginTop: 3 }}>
         {/* Product Info Section */}
-        <Grid item xs={12} sm={6}>
-          <div
-            className={styles.productInfoForm}
-            style={{
-              maxHeight: '500px',
-              minHeight: '500px',
-              overflowY: 'scroll',
-              overflowX: 'hidden',
-              border: '1px solid #ccc',
-              padding: '1rem',
-            }}
-          >
-            <Typography variant="h6">Product Info</Typography>
+        <Grid item xs={12}>
+          <div className={styles.productInfoForm}>
+            <Typography variant="h6"></Typography>
             {cart.length > 0 ? (
               <ul className={styles.productInfoList}>
                 {cart.map((item, index) => (
-                  <li
-                    key={index}
-                    className={styles.productInfoItem}
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                      marginBottom: '1rem',
-                    }}
-                  >
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                  <li key={index} className={styles.productInfoItem}>
+                    <div className={styles.productImage}>
                       <img
                         src={item.PROD_IMG}
                         alt={item.PROD_NAME}
-                        style={{
-                          width: '80px',
-                          height: '80px',
-                          objectFit: 'cover',
-                          borderRadius: '4px',
-                        }}
                       />
-                      <div>
-                        <Typography variant="body1">
-                          <strong>{item.PROD_NAME}</strong>
-                        </Typography>
-                        <Typography variant="body2">
-                          ${parseFloat(item.PROD_PRICE || 0).toFixed(2)}
-                        </Typography>
-                      </div>
                     </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                    <div className={styles.productDetails}>
+                      <Typography variant="body1">
+                        <strong>{item.PROD_NAME}</strong>
+                      </Typography>
+                      <Typography variant="body2">
+                        ${parseFloat(item.PROD_PRICE || 0).toFixed(2)}
+                      </Typography>
+                    </div>
+                    <div className={styles.removeBtn}>
                       <TextField
                         type="number"
                         value={item.quantity || 1}
@@ -144,15 +87,7 @@ export default function CartPage() {
                         inputProps={{ min: 1 }}
                         variant="outlined"
                         size="small"
-                        sx={{
-                          width: '70px',
-                          backgroundColor: '#f0f0f0',
-                          '& .MuiOutlinedInput-root': {
-                            '& fieldset': {
-                              borderColor: '#ccc',
-                            },
-                          },
-                        }}
+                        sx={{ width: '70px', backgroundColor: '#f0f0f0' }}
                       />
                       <IconButton onClick={() => handleRemoveItem(index)} color="error">
                         <DeleteIcon />
@@ -162,77 +97,30 @@ export default function CartPage() {
                 ))}
               </ul>
             ) : (
-              <Typography variant="body1">Your cart is empty.</Typography>
+              <Typography variant="body1">YOUR CART IS EMPTY.</Typography>
             )}
           </div>
         </Grid>
-
-        {/* Checkout Section */}
-        <Grid item xs={12} sm={6}>
-          <div className={styles.checkoutForm} style={{ height: '500px', padding: '1rem', border: '1px solid #ccc' }}>
-            <Typography variant="h6">Checkout</Typography>
-            <form onSubmit={handleCheckout}>
-              <div className={styles.formGroup}>
-                <TextField
-                  id="email"
-                  label="Email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  variant="outlined"
-                  fullWidth
-                  sx={{ marginBottom: '1rem', backgroundColor: '#f0f0f0' }}
-                />
-                <TextField
-                  id="cardholder"
-                  label="Cardholder Name"
-                  value={cardholder}
-                  onChange={(e) => setCardholder(e.target.value)}
-                  required
-                  variant="outlined"
-                  fullWidth
-                  sx={{ marginBottom: '1rem', backgroundColor: '#f0f0f0' }}
-                />
-                <TextField
-                  type="text"
-                  id="cvv"
-                  label="CVV"
-                  value={cvv}
-                  onChange={(e) => setCvv(e.target.value)}
-                  required
-                  variant="outlined"
-                  fullWidth
-                  sx={{ marginBottom: '1rem', backgroundColor: '#f0f0f0' }}
-                />
-                <TextField
-                  type="text"
-                  id="expiration"
-                  label="Expiration"
-                  value={expiration}
-                  onChange={(e) => setExpiration(e.target.value)}
-                  placeholder="MM/YY"
-                  required
-                  variant="outlined"
-                  fullWidth
-                  sx={{ marginBottom: '1rem', backgroundColor: '#f0f0f0' }}
-                />
-              </div>
-              <Typography variant="body2">Subtotal: ${subtotal.toFixed(2)}</Typography>
-              <Typography variant="body2">Shipping: ${shippingFee.toFixed(2)}</Typography>
-              <Typography variant="body1"><strong>Total: ${total.toFixed(2)}</strong></Typography>
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                fullWidth
-                sx={{ marginTop: '1rem' }}
-              >
-                Complete Checkout
-              </Button>
-            </form>
-          </div>
-        </Grid>
       </Grid>
+
+      {/* Button to go to Checkout */}
+      <Button
+        variant="contained"
+        color="primary"
+        fullWidth
+        onClick={goToCheckout}
+        className={styles.finalCheckoutBtn}
+      >
+        GO TO CHECKOUT
+      </Button>
+
+      {/* Snackbar for empty cart message */}
+      <Snackbar
+        open={showEmptyCartMessage}
+        autoHideDuration={3000}
+        onClose={() => setShowEmptyCartMessage(false)}
+        message="Cart is empty. Add items to proceed."
+      />
     </div>
   );
 }

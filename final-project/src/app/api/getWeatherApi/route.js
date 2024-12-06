@@ -4,7 +4,7 @@ export async function GET(req, res) {
     try {
       // Fetch weather data from the external Weather API
       const res2 = await fetch(
-        "http://api.weatherapi.com/v1/current.json?key=6dcc4b2071aa4759a99124451241610&q=Dublin&aqi=no"
+        "http://api.weatherapi.com/v1/current.json?key=ea6e8ddcf91946cb9fd111752242510&q=Dublin&aqi=no"
       );
   
       if (!res2.ok) {

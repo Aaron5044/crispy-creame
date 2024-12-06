@@ -15,9 +15,9 @@ export async function POST(req, res) {
     console.log("Email:", email);
     console.log("Password:", password);
 
-    const url = "mongodb+srv://KK_DB:pass@kkdb.hwqqo.mongodb.net/?retryWrites=true&w=majority&appName=KKDB";
+    const url = "mongodb+srv://aaron:Pass@cluster0.ngesq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
     const client = new MongoClient(url);
-    const dbName = "KK_DB";
+    const dbName = "crispy_creame";
 
     await client.connect();
     console.log("Connected successfully to server");

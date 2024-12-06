@@ -5,13 +5,13 @@ export async function GET(req) {
     console.log("In the API page for adding a new registration");
 
     // MongoDB connection URL
-    const url = "mongodb+srv://KK_DB:pass@kkdb.hwqqo.mongodb.net/?retryWrites=true&w=majority&appName=KKDB";
+    const url = "mongodb+srv://aaron:Pass@cluster0.ngesq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
     
     // Create a new MongoClient instance to connect to MongoDB
     const client = new MongoClient(url, { serverSelectionTimeoutMS: 30000 });
 
     // Database name
-    const dbName = "KK_DB";
+    const dbName = "crispy_creame";
 
     try {
         // Extract query parameters (email, password, username, role) from the incoming request URL

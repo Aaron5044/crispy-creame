@@ -74,14 +74,14 @@ export default function ManagerPage() {
   }, []);
 
   return (
-    <div style={{ background: "linear-gradient(to right, black 50%, #ff4081 50%)", minHeight: "100vh" }}>
-      <AppBar position="fixed" sx={{ background: "linear-gradient(to right, black 50%, #ff4081 50%)" }}>
+    <div style={{ background: "black", minHeight: "100vh" }}>
+      <AppBar position="fixed" sx={{ background: "black" }}>
         <Toolbar>
           <Typography
             variant="h5"
-            sx={{ fontWeight: "bold", fontFamily: "'Pacifico', cursive", color: "white", marginRight: "20px" }}
+            sx={{ fontWeight: "bold", fontFamily: "'Pacifico', cursive", color: "yellow", marginRight: "20px" }}
           >
-            KRISPYKREME
+            KRISPY KREME
           </Typography>
           <Box sx={{ display: "flex", flexGrow: 1 }}>
             <Button
@@ -105,7 +105,7 @@ export default function ManagerPage() {
                   setIsLoggedIn(false);
                   router.push("/loginExample");
                 }}
-                sx={{ color: "white" }}
+                sx={{ color: "yellow" }}
               >
                 <LogoutIcon />
                 Logout
@@ -120,8 +120,8 @@ export default function ManagerPage() {
         {/* Orders Section */}
         {selectedPage === "orders" && (
           <div>
-            <Typography variant="h4" sx={{ fontWeight: "bold", mb: 3 }}>
-              All Orders
+            <Typography variant="h4" sx={{ fontWeight: "bold", mb: 3, color:"yellow" }}>
+              ALL ORDERS
             </Typography>
             <Box sx={{ maxHeight: "500px", overflowY: "auto" }}>
               {orders.map((order, index) => (
@@ -134,6 +134,7 @@ export default function ManagerPage() {
                     alignItems: "center",
                     marginBottom: "20px",
                     padding: "15px",
+                    
                   }}
                 >
                   {/* First Section: List Products Vertically */}
@@ -150,7 +151,7 @@ export default function ManagerPage() {
                   </Box>
 
                   {/* Second Section: Order Details */}
-                  <Box sx={{ flexBasis: "50%", paddingLeft: "20px" }}>
+                  <Box sx={{ flexBasis: "20%", paddingLeft: "20px" }}>
                     <Typography variant="body2" sx={{ fontWeight: "bold" }}>
                       Name: {order.cardholder}
                     </Typography>

@@ -1,0 +1,55 @@
+/* complete.module.css */
+.cartContainer {
+    padding: 60px;
+    background-color: black; /* Full page background set to black */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    color: white; /* Set text color to white for better contrast */
+}
+
+.cartTitle {
+    font-size: 2rem;
+    color: yellow !important; /* Ensure yellow color for the title */
+}
+
+.checkoutForm {
+    padding: 2rem;
+    background-color: black;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    max-width: 600px;
+    margin: 0 auto;
+    min-height: 500px;
+}
+
+.finalCheckoutBtn {
+    background-color: yellow !important; /* Ensure the button background is yellow */
+    color: black;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.finalCheckoutBtn:hover {
+    background-color: #45a049; /* Green color on hover for button */
+}
+
+/* Styling for the "Go to Home" button specifically */
+.homeButton {
+    background-color: yellow !important; /* Yellow background for the home button */
+    color: black;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    padding: 12px 24px;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.homeButton:hover {
+    background-color: #45a049; /* Green color on hover */
+}

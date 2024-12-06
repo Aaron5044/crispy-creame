@@ -1,71 +1,23 @@
 'use client';
 
-import { useState } from 'react';
+import { Box, Button, TextField, Typography, Alert, Container, CssBaseline } from '@mui/material';
 import { useRouter } from 'next/navigation';
-import {
-  Box,
-  Button,
-  TextField,
-  Typography,
-  Alert,
-  Container,
-  CssBaseline,
-  Link as MuiLink,
-} from '@mui/material';
-
+import Link from 'next/link';
 import NAVBAR from '../TEMPLATES/NAVBAR/Navbar'; // Import Navbar
-import Link from 'next/link'; // Import Link for navigation
+import useLogin from './functions/funtion'; // Import the custom hook
+import LOGIN from './style/LoginPage.module.css'; // Import the CSS file
 
 const LoginPage = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [loginSuccess, setLoginSuccess] = useState(false); // State to track login success
   const router = useRouter();
-
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    setError('');
-    setLoginSuccess(false); // Reset login success state before attempt
-
-    try {
-      const response = await fetch('../loginExample/api/apiLogin', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-      });
-
-      if (!response.ok) {
-        setError('An error occurred. Please try again.');
-        return;
-      }
-
-      const data = await response.json();
-      console.log(data); // Log the response to check the structure
-
-      if (data.data === 'valid') {
-        setLoginSuccess(true); // Set login success to true
-
-        // Store session data in sessionStorage
-        sessionStorage.setItem(
-          'user',
-          JSON.stringify({ email, role: data.role })
-        );
-        const userRole = data.role.toLowerCase();
-
-        // Redirect based on role
-        if (userRole === 'customer') {
-          router.push('/customer'); // Redirect to customer page
-        } else if (userRole === 'manager') {
-          router.push('/manager'); // Redirect to manager page
-        }
-      } else {
-        setError('Invalid credentials');
-      }
-    } catch (err) {
-      setError('An error occurred. Please try again.');
-    }
-  };
+  const {
+    email,
+    setEmail,
+    password,
+    setPassword,
+    error,
+    loginSuccess,
+    handleLogin,
+  } = useLogin(router); // Use the custom hook
 
   return (
     <>
@@ -73,31 +25,13 @@ const LoginPage = () => {
       <NAVBAR />
 
       {/* Main page with a gradient background */}
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: '100vh',
-          background: 'linear-gradient(to right, black 50%, #8B1A4B 50%)', // Half black, half dark pink
-        }}
-      >
+      <Box className={LOGIN.loginContainer}>
         {/* Login form container */}
         <Container component="main" maxWidth="xs">
           <CssBaseline />
-          <Box
-            sx={{
-              backgroundColor: 'grey',
-              padding: 4,
-              borderRadius: 2,
-              boxShadow: 3,
-              bgcolor: '#767B91',
-              border: '2px solid white',
-              color: 'white',
-            }}
-          >
+          <Box className={LOGIN.loginForm}>
             <Typography component="h1" variant="h5" sx={{ textAlign: 'center' }}>
-              Login
+              LOGIN
             </Typography>
             <Box component="form" onSubmit={handleLogin} sx={{ mt: 2 }}>
               {/* Email input */}
@@ -110,7 +44,7 @@ const LoginPage = () => {
                 name="email"
                 autoComplete="email"
                 autoFocus
-                sx={{border: '2px solid white',color: 'white'}}
+                className={LOGIN.inputField}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -125,21 +59,21 @@ const LoginPage = () => {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                className={LOGIN.inputField}
                 value={password}
-                sx={{border: '2px solid white', color:'white'}}
                 onChange={(e) => setPassword(e.target.value)}
               />
 
               {/* Error alert */}
               {error && (
-                <Alert severity="error" sx={{ mt: 2 }}>
+                <Alert severity="error" className={LOGIN.alert}>
                   {error}
                 </Alert>
               )}
 
               {/* Success message */}
               {loginSuccess && (
-                <Alert severity="success" sx={{ mt: 2 }}>
+                <Alert severity="success" className={LOGIN.alert}>
                   Login Complete! Session Started.
                 </Alert>
               )}
@@ -149,37 +83,19 @@ const LoginPage = () => {
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2, color:'white', backgroundColor:'#767B91', border: '2px solid white',             '&:hover': {
-                  bgcolor: '#F7C59F',
-                  color: 'darkpink',
-                }, }}
+                className={LOGIN.loginButton}
               >
-                Login
+                LOGIN
               </Button>
 
               {/* Register Button */}
               <Box textAlign="center" mt={2}>
-              <Link href="/mainRegister" passHref>
-                <Typography
-                  component="a"
-                  sx={{
-                    fontWeight: 'bold',
-                    fontSize: '0.9rem',
-                    color: 'inherit',
-                    textDecoration: 'none',
-                    '&:hover': {
-                      backgroundColor: 'black',
-                      color: 'white',
-                      padding: '0.2rem',
-                      borderRadius: '5px',
-                    },
-                  }}
-                >
-                  DON'T HAVE AN A/C JUST - REGISTER!!!
-                </Typography>
-              </Link>
-            </Box>
-
+                <Link href="/mainRegister" passHref>
+                  <Typography component="a" className={LOGIN.registerLink}>
+                    REGISTER HERE
+                  </Typography>
+                </Link>
+              </Box>
             </Box>
           </Box>
         </Container>

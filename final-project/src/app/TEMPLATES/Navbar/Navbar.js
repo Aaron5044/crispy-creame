@@ -33,20 +33,18 @@ export default function Navbar() {
   const menuItems = [
     { name: "Home", icon: <HomeIcon />, link: "/customer" }, // Added Home icon
     { name: "Cart", icon: <ShoppingCartIcon />, link: "/cart" },
-    // Only show login icon if logged out
     !isLoggedIn && { name: "Login/Register", icon: <AccountCircleIcon />, link: "/loginExample" },
-    // Only show logout icon if logged in
     isLoggedIn && {
       name: "Logout",
       icon: <ExitToAppIcon />,
-      onClick: handleLogout, // Log out and clear session
+      onClick: handleLogout,
     },
   ];
 
   return (
     <Box sx={{ flexGrow: 1 }}>
       {/* AppBar is fixed to the top and spans the full width */}
-      <AppBar position="fixed" sx={{ backgroundColor: "#ff4081", width: "100%" }}>
+      <AppBar position="fixed" sx={{ backgroundColor: "yellow", width: "100%" }}>
         <Toolbar sx={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
           {/* Logo - Aligned to the left */}
           <Typography
@@ -54,13 +52,13 @@ export default function Navbar() {
             sx={{
               fontWeight: "bold",
               fontFamily: "'Pacifico', cursive", // Use bubbly font
-              color: "white",
+              color: "black", // Set text color to black
               display: "flex",
               alignItems: "center",
               mr: 2,
             }}
           >
-            Krispy Kreme
+            KRISPY KREME
           </Typography>
 
           {/* Desktop Menu */}
@@ -74,7 +72,7 @@ export default function Navbar() {
                     href={item.link}
                     onClick={item.onClick} // If logout, execute onClick
                     sx={{
-                      color: "white",
+                      color: "black", // Set icon color to black
                       fontWeight: "bold",
                       "&:hover": { textDecoration: "underline" },
                       margin: "0 10px",

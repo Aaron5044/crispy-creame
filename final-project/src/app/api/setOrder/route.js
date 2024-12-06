@@ -4,9 +4,9 @@ const nodemailer = require("nodemailer");
 export async function POST(req) {
     console.log("In the API page for placing a new order");
 
-    const url = "mongodb+srv://KK_DB:pass@kkdb.hwqqo.mongodb.net/?retryWrites=true&w=majority&appName=KKDB";
+    const url = "mongodb+srv://aaron:Pass@cluster0.ngesq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
     const client = new MongoClient(url, { serverSelectionTimeoutMS: 30000 });
-    const dbName = "KK_DB";
+    const dbName = "crispy_creame";
 
     try {
         const orderDetails = await req.json();
