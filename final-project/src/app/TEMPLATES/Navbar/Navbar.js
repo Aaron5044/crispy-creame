@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React, { useEffect, useState } from "react";
 import { AppBar, Box, Toolbar, IconButton, Typography } from "@mui/material";
@@ -22,22 +22,27 @@ export default function Navbar() {
   }, []);
 
   const handleLogout = () => {
-    sessionStorage.removeItem("user"); // Clear session data
-    setIsLoggedIn(false); // Update the login state
-    router.push("/logout"); // Redirect to logout page
-    console.log("Session ended!!!!!!!!!!!"); // Log to console
-    console.log("Session ended!!!!!!!!!!!"); // Log to console
-    console.log("Session ended!!!!!!!!!!!"); // Log to console
+    try {
+      sessionStorage.removeItem("user"); // Clear session data
+      setIsLoggedIn(false); // Update the login state
+      router.push("/logout"); // Redirect to logout page
+      console.log("Session ended!!!!!!!!!!!"); // Log to console
+    } catch (error) {
+      console.error("Error logging out", error);
+    }
   };
 
   const menuItems = [
     { name: "Home", icon: <HomeIcon />, link: "/customer" }, // Added Home icon
-    { name: "Cart", icon: <ShoppingCartIcon />, link: "/cart" },
+    // Only show Cart if logged in
+    isLoggedIn && { name: "Cart", icon: <ShoppingCartIcon />, link: "/cart" },
+    // Only show login icon if logged out
     !isLoggedIn && { name: "Login/Register", icon: <AccountCircleIcon />, link: "/loginExample" },
+    // Only show logout icon if logged in
     isLoggedIn && {
       name: "Logout",
       icon: <ExitToAppIcon />,
-      onClick: handleLogout,
+      onClick: handleLogout, // Log out and clear session
     },
   ];
 
@@ -45,20 +50,20 @@ export default function Navbar() {
     <Box sx={{ flexGrow: 1 }}>
       {/* AppBar is fixed to the top and spans the full width */}
       <AppBar position="fixed" sx={{ backgroundColor: "yellow", width: "100%" }}>
-        <Toolbar sx={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
+        <Toolbar sx={{ display: "flex", justifyContent: "space-between", width: "100%", height: "100px" }}>
           {/* Logo - Aligned to the left */}
           <Typography
             variant="h5"
             sx={{
               fontWeight: "bold",
               fontFamily: "'Pacifico', cursive", // Use bubbly font
-              color: "black", // Set text color to black
+              color: "black",
               display: "flex",
               alignItems: "center",
               mr: 2,
             }}
           >
-            KRISPY KREME
+            KRISPY CREME
           </Typography>
 
           {/* Desktop Menu */}
@@ -72,7 +77,7 @@ export default function Navbar() {
                     href={item.link}
                     onClick={item.onClick} // If logout, execute onClick
                     sx={{
-                      color: "black", // Set icon color to black
+                      color: "black",
                       fontWeight: "bold",
                       "&:hover": { textDecoration: "underline" },
                       margin: "0 10px",
@@ -88,6 +93,6 @@ export default function Navbar() {
 
       {/* Add padding to content below navbar to avoid overlap */}
       <Box sx={{ paddingTop: "64px" }} />
-    </Box>
-  );
+    </Box>
+  );
 }
