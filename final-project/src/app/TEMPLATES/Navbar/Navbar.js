@@ -26,7 +26,7 @@ export default function Navbar() {
       sessionStorage.removeItem("user"); // Clear session data
       setIsLoggedIn(false); // Update the login state
       router.push("/logout"); // Redirect to logout page
-      console.log("Session ended!!!!!!!!!!!"); // Log to console
+      console.log("Session ended"); // Log to console
     } catch (error) {
       console.error("Error logging out", error);
     }
@@ -56,7 +56,7 @@ export default function Navbar() {
             variant="h5"
             sx={{
               fontWeight: "bold",
-              fontFamily: "'Pacifico', cursive", // Use bubbly font
+              fontFamily: "'Times New Roman', cursive", // Use bubbly font
               color: "black",
               display: "flex",
               alignItems: "center",

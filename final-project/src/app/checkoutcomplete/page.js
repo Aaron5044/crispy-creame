@@ -17,7 +17,7 @@ export default function CheckoutCompletePage() {
         CHECKOUT COMPLETE!
       </Typography>
       <Typography variant="body1" sx={{ textAlign: 'center', paddingTop: 2 }}>
-        Thank you for your purchase. Your order is being processed.
+        Thank you for your purchase. Your order is being processed and email is send.
       </Typography>
       <div style={{ textAlign: 'center', marginTop: '20px' }}>
         <Button

@@ -1,16 +1,10 @@
 'use client'; // Indicates that this component is rendered on the client-side
 
 import React, { useState } from 'react';
-import {
-  Box,
-  TextField,
-  Button,
-  Typography,
-  Alert,
-} from '@mui/material'; // Import Material UI components
+import { Box, TextField, Button, Typography, Alert } from '@mui/material'; // Import Material UI components
+import { useRouter } from 'next/navigation'; // Import useRouter for navigation
 
 export default function RegisterForm() {
-  // State for managing form inputs
   const [formData, setFormData] = useState({
     username: '',
     role: '',
@@ -19,6 +13,8 @@ export default function RegisterForm() {
   });
 
   const [responseMessage, setResponseMessage] = useState(''); // State for response messages
+  const [isSuccessful, setIsSuccessful] = useState(false); // Track success for redirection
+  const router = useRouter(); // Initialize router for redirection
 
   // Update state on input change
   const handleChange = (e) => {
@@ -43,6 +39,10 @@ export default function RegisterForm() {
 
       if (data.success) {
         setResponseMessage('Registration successful!');
+        setIsSuccessful(true); // Mark registration as successful
+        setTimeout(() => {
+          router.push('/loginExample'); // Redirect to login page after 2 seconds
+        }, 2000);
       } else {
         setResponseMessage(`Error: ${data.error}`);
       }

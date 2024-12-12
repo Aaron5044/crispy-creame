@@ -4,29 +4,35 @@ import { getCart, addToCart, clearCart } from "../cart/utils/storage";
 import { IconButton, Typography, Grid, Button, TextField, Snackbar } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Navbar from '../TEMPLATES/NAVBAR/Navbar';
-import styles from './style/cartPage.module.css'; // Import the CSS module
-import { useRouter } from 'next/navigation'; // For redirecting
+import styles from './style/cartPage.module.css'; 
+import { useRouter } from 'next/navigation'; 
+
+// CartPage component to manage and display the shopping cart
 
 export default function CartPage() {
   const [cart, setCartState] = useState([]);
   const [showEmptyCartMessage, setShowEmptyCartMessage] = useState(false); // New state for empty cart message
-  const router = useRouter();
+  const router = useRouter(); // UseRouter provides a way to programmatically navigate (redirect) between pages in your application.
 
+  // useEffect hook to fetch cart data from localStorage on initial load
   useEffect(() => {
     const savedCart = getCart();
     setCartState(savedCart || []);
   }, []);
 
+  // Handle removing an item from the cart
   const handleRemoveItem = (index) => {
-    const updatedCart = cart.filter((_, i) => i !== index);
+    const updatedCart = cart.filter((_, i) => i !== index); // Filter out the item by index
     setCartState(updatedCart);
     if (updatedCart.length === 0) {
       clearCart();
     } else {
-      localStorage.setItem("cart", JSON.stringify(updatedCart));
+      localStorage.setItem("cart", JSON.stringify(updatedCart)); // Update the cart in localStorage
     }
   };
 
+
+  // Handle changing the quantity of a product in the cart
   const handleQuantityChange = (index, value) => {
     const updatedCart = [...cart];
     updatedCart[index].quantity = Math.max(1, value);
@@ -34,6 +40,7 @@ export default function CartPage() {
     addToCart(updatedCart); // Use addToCart to update the cart in localStorage
   };
 
+  // Calculate the subtotal of the cart items
   const subtotal = cart.reduce((acc, item) => {
     const price = parseFloat(item.PROD_PRICE || 0);
     const quantity = parseInt(item.quantity || 1, 10);
@@ -51,6 +58,10 @@ export default function CartPage() {
       setShowEmptyCartMessage(true); // Show empty cart message
     }
   };
+
+// This is the CartPage component, which is responsible for managing and displaying the user's shopping cart.
+// It handles displaying cart items, allowing the user to adjust quantities, remove items, and proceed to checkout.
+// The component uses localStorage to persist cart data between page reloads.
 
   return (
     <div className={styles.cartContainer}>

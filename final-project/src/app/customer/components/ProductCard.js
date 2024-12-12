@@ -5,7 +5,8 @@ import { addToCart } from "../../cart/utils/storage"; // Import addToCart functi
 import { useRouter } from "next/navigation";
 import productStyles from "../styles/productCardStyles.module.css";
 
-// Define ProductCard OUTSIDE the main ProductPage component
+// This component represents a card that displays individual product details and allows the user to add the product to their cart.
+// It receives product data and an `onAddToCart` function as props.
 const ProductCard = ({ product, onAddToCart }) => (
   <div className={productStyles.card}>
     <img
@@ -21,7 +22,7 @@ const ProductCard = ({ product, onAddToCart }) => (
         className={productStyles.addToCartButton}
         onClick={() => onAddToCart(product)}
       >
-        Add to Cart
+        ADD TO CART
       </button>
     </div>
   </div>
@@ -31,7 +32,8 @@ const ProductPage = () => {
   const router = useRouter();
   const [products, setProducts] = useState([]);
 
-  // Fetch products from API with duplicate filtering
+  // Fetch products from the API and filter out duplicates based on the product's unique _id.
+  // This effect runs only once when the component mounts.
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -59,6 +61,7 @@ const ProductPage = () => {
     fetchProducts();
   }, []);
 
+// Function to handle adding a product to the cart
   const handleAddToCart = (product) => {
     addToCart(product); // Use addToCart from storage
     alert(`${product.PROD_NAME} added to cart!`);
@@ -70,8 +73,9 @@ const ProductPage = () => {
 
   return (
     <div style={{ padding: "2rem", backgroundColor: "black",}}>
+      {/* Display loading message if products haven't been loaded yet */}
       {products.length === 0 ? (
-        <p>Loading products...</p>
+        <p>Loading products</p>
       ) : (
         <div style={{ display: "flex", gap: "2rem", flexWrap: "wrap" }}>
           {products.map((product) => (

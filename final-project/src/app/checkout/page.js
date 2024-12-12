@@ -6,6 +6,9 @@ import Navbar from '../TEMPLATES/NAVBAR/Navbar';
 import styles from '../checkout/styles/checkout.module.css';
 import { useRouter } from 'next/navigation';
 
+// CheckoutPage component: Handles the checkout process by allowing users to enter payment details,
+// display cart items, calculate total amounts, and submit the order.
+
 export default function CheckoutPage() {
   const [cart, setCartState] = useState([]);
   const [email, setEmail] = useState('');
@@ -20,18 +23,22 @@ export default function CheckoutPage() {
     setCartState(savedCart || []);
   }, []);
 
+  // Calculate the subtotal (sum of item prices * quantity)
   const subtotal = cart.reduce((acc, item) => {
     const price = parseFloat(item.PROD_PRICE || 0);
     const quantity = parseInt(item.quantity || 1, 10);
     return acc + price * quantity;
   }, 0);
 
+   // Define a fixed shipping fee, which applies if there are items in the cart
   const shippingFee = cart.length > 0 ? 5.99 : 0;
   const total = subtotal + shippingFee;
 
+  // handleCheckout function: Handles form submission for the checkout process
   const handleCheckout = async (e) => {
     e.preventDefault();
 
+  // Prepare order details, including payment info and cart items
     const orderDetails = {
       email,
       cardholder,
@@ -47,6 +54,11 @@ export default function CheckoutPage() {
       shippingFee,
       total,
     };
+
+  // This code handles the checkout process by making a POST request to the backend to process the order.
+  // It sends the order details (including cart items and payment information) as a JSON object.
+  // If the order is successfully processed, it clears the cart from both localStorage and state, and redirects the user to the confirmation page.
+  // If the checkout fails or there's an error, it shows an alert with an error message.
 
     try {
       const response = await fetch('../api/setOrder', {

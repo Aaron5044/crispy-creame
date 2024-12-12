@@ -8,7 +8,9 @@ const Dashboard = () => {
   const router = useRouter();
 
   useEffect(() => {
-    // Check session data after component mounts
+    /// This code checks if user data is stored in sessionStorage when the component mounts. 
+    // If the data exists, it sets the user data to state. 
+    // If no user data is found, it redirects the user to the login page.
     const fetchUser = async () => {
       const user = JSON.parse(sessionStorage.getItem("user")); // Get user data from sessionStorage
       if (user) {
@@ -18,6 +20,7 @@ const Dashboard = () => {
       }
     };
 
+    // Fetch user data once after the component mounts
     fetchUser();
   }, []);  // Empty dependency array ensures this runs only once after mount
 

@@ -50,6 +50,7 @@
   max-height: 200px;
   max-width: 250px;
   padding-top: 50px;
+  font-weight: bold;
 }
 
 .weatherBox h3 {

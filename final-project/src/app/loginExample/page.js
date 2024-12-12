@@ -74,7 +74,7 @@ const LoginPage = () => {
               {/* Success message */}
               {loginSuccess && (
                 <Alert severity="success" className={LOGIN.alert}>
-                  Login Complete! Session Started.
+                  Login Complete and Session Started.
                 </Alert>
               )}
 

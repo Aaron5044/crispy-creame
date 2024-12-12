@@ -6,11 +6,15 @@ import ProductCard from "./components/ProductCard";
 import styles from "./styles/styles.module.css";
 import { CartProvider } from "../customer/components/CartContext";
 
+
+// This component fetches and displays a list of products and weather information.
+// It uses state to store products and weather data, and fetches them from APIs on mount.
 export default function CustomerPage() {
   const [products, setProducts] = useState([]);
   const [weather, setWeatherData] = useState(null);
 
-  // Fetch weather data
+// This useEffect hook fetches weather data from the API and stores it in the weather state.
+// It runs only once when the component mounts 
   useEffect(() => {
     fetch("../api/getWeatherApi")
       .then((res) => res.json())
@@ -18,7 +22,8 @@ export default function CustomerPage() {
       .catch((err) => console.error("Error fetching weather data:", err));
   }, []);
 
-  // Fetch product data
+// This useEffect hook fetches product data from the API, removes duplicate products based on _id,
+// and stores the unique products in the products state.
   useEffect(() => {
     fetch("../api/getProducts")
       .then((res) => res.json())
@@ -41,7 +46,7 @@ export default function CustomerPage() {
           <div className={styles.productPage}>
             {products.length > 0 && (
               <div className={styles.productGrid}>
-                {/* Render only the first product */}
+                {/* This is to make product appear, only the first product */}
                 <ProductCard key={products[0]._id} product={products[0]} />
               </div>
             )}

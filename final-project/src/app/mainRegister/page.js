@@ -1,10 +1,18 @@
+'use client';
+
 import React from 'react'; 
 import Navbar from '../TEMPLATES/NAVBAR/Navbar'; // Import Navbar component
 import RegisterForm from './components/RegisterForm'; // Import RegisterForm component
 import { Box } from '@mui/material'; // Import Box from Material UI
-import { AutoAwesome } from '@mui/icons-material'; // Import an icon from Material UI
+import { useRouter } from 'next/navigation'; // Import useRouter for navigation
 
 export default function RegisterPage() {
+  const router = useRouter(); // Initialize router for redirection
+
+  const handleRegisterSuccess = () => {
+    router.push('/loginExample'); // Redirect to the login page after registration
+  };
+
   return (
     <Box
       sx={{
@@ -22,15 +30,14 @@ export default function RegisterPage() {
           position: 'absolute', // Position it absolutely
           top: 0, // Align to the top of the parent
           left: 0, // Align to the left of the parent
-          width: '100%', // Set the width to half of the parent
+          width: '100%', // Set the width to 100% of the parent
           height: '100%', // Set the height to 100% of the parent
           bgcolor: 'black', // Set background color to black
         }}
       />
- 
-      
+
       {/* Foreground Content */}
-      <Navbar /> // Include the Navbar component
+      <Navbar /> {/* Include the Navbar component */}
       <Box
         sx={{
           zIndex: 2, // Ensure form appears above the background
@@ -40,14 +47,10 @@ export default function RegisterPage() {
           width: '90%', // Set the width to 90% of the parent container
           maxWidth: 600, // Set maximum width to 600px
           boxShadow: 0, // Remove box shadow
-          margin: '-5px auto' // Apply 5px margin on top and bottom, auto left/right
+          margin: '-5px auto', // Apply 5px margin on top and bottom, auto left/right
         }}
-
-        // Include the RegisterForm component
       >
-
-        
-        <RegisterForm /> 
+        <RegisterForm onRegisterSuccess={handleRegisterSuccess} /> {/* Pass the callback */}
       </Box>
     </Box>
   );
